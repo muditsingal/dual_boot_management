@@ -4,7 +4,7 @@ Dual boot can be challenging for users new to linux. Dual boot is a powerful too
 1. Virtual machines (such as [VirtualBox](https://www.virtualbox.org/)) are flexible but hardware acceleration and working with I/O ports can be challenging.
 2. [WSL 2 (Windows subsystem for linux)](https://learn.microsoft.com/en-us/windows/wsl/) is a great tool and comes with numerous features and linux capabilities that you can use without setting up a VM or dual boot machine. I haven't used it extensively, hence I am not sure how well hardare interfacing works on it.
 
-## Overview of the most common steps to dual boot your system
+## Overview of the most common steps to dual boot your system (Ubuntu)
 
 **Here's a [video link](https://www.youtube.com/watch?v=-iSAyiicyQY) that I usually refer to when in doubt for ubuntu**
 
@@ -15,17 +15,43 @@ Dual boot can be challenging for users new to linux. Dual boot is a powerful too
 5. Boot into the live bootable USB.
 6. Setup your linux system as you would into the partition created. Here's a useful link for [Ubuntu](https://www.youtube.com/watch?v=-iSAyiicyQY) (Thanks Ksk Royal for making this amazing video tutorial).
 
+## How to undo dual boot or clean-up multi-boot systems!
 
+You have worked with dual boot on your system and your project has been completed. You now want to remove the partition so that you can get more room on your primary disk (or any other reason). If you are like me, you deleted the linux partition from windows disk management tool and added the space as a volume in your system. Well, though that works, a few other steps are required to truly get your system configuration back to normal. Once you reboot, you may notice that the other boot options are still visible in your boot menu! You shouldn't leave this as is, because if you have other boot options they may not work! Also, if you change your system configuration later on, you may not be able to properly boot into the desired OS.
+
+I have looked into 2 ways to properly reconfigure the BIOS boot menu:
+<ol>
+    <li><b>The easy way:</b> Using the boot-repair-disk tool. You can follow this <a href="https://youtu.be/oLJczJBjhj0?si=9_K5uyrKA9Nn-ib4">video tutorial</a> or the steps given below: </li>
+        <ol type="i">
+            <li>Download the ISO image using the link: [boot-repair-disk](https://sourceforge.net/projects/boot-repair-cd/).</li>
+            <li>Create a bootable disk with this ISO image using Balena, Ventoy, or any other tool you are comfortable with.</li>
+            <li>Now, boot into this option and should be visible as UEFI removable partition (or similar option). Once in, you should be welcomed by a primitive linux home. The Boot Repair should automatically start.</li>
+            <li>If not, launch it using the icon that looks like a spanner</li>
+            <li>If the tool asks to update it, select yes and let it update. After the update is complete, the tool will continue scanning your system for potential boot related issues.</li>
+            <li>In a few minutes the tool will finish its diagnosis, and you you can then choose to simply select <b>Recommended repair</b> which should normally work. You can create a <b>BootInfo Summary</b> which will list all the existing bootloaders.</li>
+            <li>Once the "Recommended Repair" is complete, you should only see the boot options that actually work!</li>
+        </ol>
+    <li><b>The not so easy way:</b> Manually deleting boot options from Windows... (to be completed) </li>
+</ol>
+<br>
 
 ## How to give your PC an external soul (Dual boot using an external boot drive)
 
-Sometimes, the issue with dual boot is that you do not have (or cannot add) sufficient storage in your PC (a common case for laptops). Now, you might be frustrated how you can allocate sufficient storage for another partition in which you will keep your linux distro. Well you are in luck (I hope)! You can use an external SSD to create a dual boot system, just like you'd use an internal SSD. 
+Sometimes, you do not have (or cannot add) sufficient storage in your PC (a common case for laptops). Now, you might be frustrated how you can allocate sufficient storage for another partition in which you will keep your linux distro. Well you are in luck! You can use an external SSD to create a dual boot system, just like you'd use an internal SSD. 
 
 Before we begin, I would like to give a few disclaimers:
 
 1. You might face issues while booting with your original OS (eg. Windows), as the BIOS may not be able to detect all necessary partitions (grub bootloader).
-2. Make sure you use a USB 3.0 device and port for optimal speeds. 
+2. Make sure you use a USB 3.0+ device and port for optimal speeds.
 3. Have a backup ready of your most important files. As suggested for all new dual boot setups, its best to have a backup in case things go sideways.
 4. You will need 2 USB ports - One for the external SSD and another for the bootable pendrive. You can use a USB hub if necessary.
 
 Now to the good stuff! Follow these steps for setting up dual boot using an external SSD:
+
+1. Buy an external SSD with ample storage capacity something like: https://a.co/d/dfzWilH should do.
+2. Mount both the external SSD and the bootable USB into your PC and restart your PC into the BIOS boot menu.
+3. Now follow the same steps that you would to setup a normal dual boot system. Carefully select the external SSD as the partition for installing your Linux Distro.
+4. After your Linux installation is done, restart into the BIOS boot menu while ensuring that the external SSD is mounted to your system.
+5. Select the Linux distro that matches the name of your boot media.
+6. Congratulations! You can now work in your favourite linux distro without running out of space. 
+This installation is very flexible and reliable. I have been using this setup as my daily dev environment for about a year now and haven't faced any issues.
