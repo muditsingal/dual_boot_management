@@ -17,22 +17,44 @@ Dual boot can be challenging for users new to linux. Dual boot is a powerful too
 
 ## How to undo dual boot or clean-up multi-boot systems!
 
-You have worked with dual boot on your system and your project has been completed. You now want to remove the partition so that you can get more room on your primary disk (or any other reason). If you are like me, you deleted the linux partition from windows disk management tool and added the space as a volume in your system. Well, though that works, a few other steps are required to truly get your system configuration back to normal. Once you reboot, you may notice that the other boot options are still visible in your boot menu! You shouldn't leave this as is, because if you have other boot options they may not work! Also, if you change your system configuration later on, you may not be able to properly boot into the desired OS.
+You have worked with dual boot on your system and your project has been completed. You now want to remove the partition so that you can get more room on your primary disk (or any other reason). If you are like me, you deleted the linux partition from windows disk management tool and added the space as a volume in your system. Well, though that works, the Grub Boot Loader is still configured in your system's UEFI boot loader. Once you reboot, you may notice that the other boot options are still visible in your boot menu! You shouldn't leave this as is, because if you have other boot options they may not work! Also, if you change your system configuration later on, you may not be able to properly boot into the desired OS.
 
 I have looked into 2 ways to properly reconfigure the BIOS boot menu:
 <ol>
     <li><b>The easy way:</b> Using the boot-repair-disk tool. You can follow this <a href="https://youtu.be/oLJczJBjhj0?si=9_K5uyrKA9Nn-ib4">video tutorial</a> or the steps given below: </li>
         <ol type="i">
-            <li>Download the ISO image using the link: [boot-repair-disk](https://sourceforge.net/projects/boot-repair-cd/).</li>
+            <li>Download the ISO image using the link: <a href="https://sourceforge.net/projects/boot-repair-cd/">boot-repair-disk</a></li>
             <li>Create a bootable disk with this ISO image using Balena, Ventoy, or any other tool you are comfortable with.</li>
             <li>Now, boot into this option and should be visible as UEFI removable partition (or similar option). Once in, you should be welcomed by a primitive linux home. The Boot Repair should automatically start.</li>
             <li>If not, launch it using the icon that looks like a spanner</li>
             <li>If the tool asks to update it, select yes and let it update. After the update is complete, the tool will continue scanning your system for potential boot related issues.</li>
             <li>In a few minutes the tool will finish its diagnosis, and you you can then choose to simply select <b>Recommended repair</b> which should normally work. You can create a <b>BootInfo Summary</b> which will list all the existing bootloaders.</li>
-            <li>Once the "Recommended Repair" is complete, you should only see the boot options that actually work!</li>
+            <li>Once the "Recommended Repair" is complete, you should only see the boot options that actually work!
+            </li>
         </ol>
-    <li><b>The not so easy way:</b> Manually deleting boot options from Windows... (to be completed) </li>
+    <li><b>The not so easy way:</b> Manually deleting boot options from Windows. I know it sounds scary, but don't worry, the step by step guide will get you through the process effortlessly. I followed these 2 links to successfully fix my UEFI boot menu: <a href="https://unix.stackexchange.com/questions/552728/removed-both-linux-installations-but-bios-still-shows-them-in-boot-options">Unix Stack Exchange</a> and <a href="https://dev.to/spectrumcetb/how-to-remove-ubuntu-completely-from-a-dual-boot-pc-uefi-3f12#:~:text=You%20will%20still%20find%20ubuntu,step%20is%20to%20remove%20it">Dev guide by Silla Priyadarshni</a>. Make sure to follow from the first to the last step in order:
+    <ol type="i">
+            <li>Open a command prompt (cmd.exe) as an Administrator.</li>
+            <li>List the boot options from firmware boot manager using <code>bcdedit /enum firmware</code>. Each entry will have a description, look for the one that matches your previously installed boot OS.</li>
+            <li>To delete an entry, use bcdedit /delete <identifier>, replacing <identifier> with the identifier GUID value of the corresponding entry. The command should look like:
+            <code>bcdedit /delete {12345678-9abc-def0-1234-56789abcdef0}</code>.</li>
+            <li>Start the diskpart tool by the command - <code>diskpart</code>.</li>
+            <li>Identify UEFI partitions by:  <code>list disk</code>.</li>
+            <li>Mount the concerned disk (if your boot is in other disk it might be disk 1 or 2, but for single disk systems it'll be disk 0): <code>select disk 0</code>. </li>
+            <li>Check all the partitions of the selected disk using: <code>list partition</code> and identify the <b>uefi system partition</b>.</li>
+            <li>Mount the concerned partition: <code>select partition 3</code>. In my case, the uefi partition system had partition number 3, it might vary in your case.</li>
+            <li>Assign a label to the partition using: <code>assign letter=t</code> (It can be any letter). This will mount your partition EFI partition (approx 100 mb) in file explorer.</li>
+            <li>Exit the diskpart tool using: <code>exit</code>.</li>
+            <li>Now access the file system of the mounted partition using the letter which you have assigned in the CMD line. I am entering <code>t:</code>.</li>
+            <li>List the contents of the partition using: <code>dir</code>.</li>
+            <li>Now we have to change folder so type <code>cd efi</code> and type <code>dir</code> to see the contents of efi folder.</li>
+            <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to conform deletion.</li>
+            <li>Type <code>dir</code> to ensure the folder is deleted</li>
+            <li>Finally, restart your PC to apply changes!</li>
+            </ol>
+    </li>
 </ol>
+Congratulations! You can now recover the original state of your PC from any number of OS configuration changes!
 <br>
 
 ## How to give your PC an external soul (Dual boot using an external boot drive)
@@ -53,5 +75,9 @@ Now to the good stuff! Follow these steps for setting up dual boot using an exte
 3. Now follow the same steps that you would to setup a normal dual boot system. Carefully select the external SSD as the partition for installing your Linux Distro.
 4. After your Linux installation is done, restart into the BIOS boot menu while ensuring that the external SSD is mounted to your system.
 5. Select the Linux distro that matches the name of your boot media.
-6. Congratulations! You can now work in your favourite linux distro without running out of space. 
+
+Congratulations! You can now work in your favourite linux distro without running out of space. 
 This installation is very flexible and reliable. I have been using this setup as my daily dev environment for about a year now and haven't faced any issues.
+
+
+P.S. Thank you for reading the article. I am by no means an expert of dual booting systems, this is just what I have learned through my experiences. Feel free to share your thoughts on this article and if there're any errors in any of the above sections. 
