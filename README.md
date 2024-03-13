@@ -51,9 +51,10 @@ I have looked into 2 ways to properly reconfigure the BIOS boot menu:
             <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to conform deletion.</li>
             <li>Type <code>dir</code> to ensure the folder is deleted</li>
             <li>Finally, restart your PC to apply changes!</li>
-            </ol>
+        </ol>
     </li>
 </ol>
+
 Congratulations! You can now recover the original state of your PC from any number of OS configuration changes!
 <br>
 
