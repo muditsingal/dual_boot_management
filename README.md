@@ -33,7 +33,7 @@ I have looked into 2 ways to properly reconfigure the BIOS boot menu:
             </li>
         </ol>
     <li><b>The not so easy way:</b> Manually deleting boot options from Windows. I know it sounds scary, but don't worry, the step-by-step guide will get you through the process effortlessly. I followed these 2 links to successfully fix my UEFI boot menu: <a href="https://unix.stackexchange.com/questions/552728/removed-both-Linux-installations-but-bios-still-shows-them-in-boot-options">Unix Stack Exchange</a> and <a href="https://dev.to/spectrumcetb/how-to-remove-ubuntu-completely-from-a-dual-boot-pc-uefi-3f12#:~:text=You%20will%20still%20find%20ubuntu,step%20is%20to%20remove%20it">Dev guide by Silla Priyadarshni</a>. Make sure to follow from the first to the last step in order:
-    <ol type="i">
+        <ol type="i">
             <li>Open a command prompt (cmd.exe) as an Administrator.</li>
             <li>List the boot options from firmware boot manager using <code>bcdedit /enum firmware</code>. Each entry will have a description, look for the one that matches your previously installed boot OS.</li>
             <li>To delete an entry, use bcdedit /delete <identifier>, replacing <identifier> with the identifier GUID value of the corresponding entry. The command should look like:
@@ -51,8 +51,8 @@ I have looked into 2 ways to properly reconfigure the BIOS boot menu:
             <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to conform deletion.</li>
             <li>Type <code>dir</code> to ensure the folder is deleted</li>
             <li>Finally, restart your PC to apply changes!</li>
-        </ol>
-    </li>
+
+</ol>
 </ol>
 
 Congratulations! You can now recover the original state of your PC from any number of OS configuration changes!
