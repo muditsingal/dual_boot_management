@@ -2,8 +2,8 @@
 <p>Dual boot can be challenging for users new to Linux. Dual boot is a powerful tool that allows developers, researchers, and hobbyists to tinker with different OS configurations and harness the true potential of a system. Other alternatives to dual boot are available with a few limitations:</p>
 
 <ol>
-    <li>Virtual machines (such as <a href="https://www.virtualbox.org/">VirtualBox</a>) are flexible but hardware acceleration and working with I/O ports can be challenging.
-    <li><a href="https://learn.microsoft.com/en-us/windows/wsl/">WSL 2 (Windows subsystem for Linux)</a> is a great tool and comes with numerous features and Linux capabilities that you can use without setting up a VM or dual boot machine. I haven't used it extensively; hence I am not sure how well hardware interfacing works on it.
+    <li>Virtual machines (such as <a href="https://www.virtualbox.org/">VirtualBox</a>) are flexible but hardware acceleration and working with I/O ports can be challenging.</li>
+    <li><a href="https://learn.microsoft.com/en-us/windows/wsl/">WSL 2 (Windows subsystem for Linux)</a> is a great tool and comes with numerous features and Linux capabilities that you can use without setting up a VM or dual boot machine. I haven't used it extensively; hence I am not sure how well hardware interfacing works on it.</li>
 </ol>
 
 <h2>Overview of the most common steps to dual boot your system (Ubuntu)</h2>
@@ -11,12 +11,12 @@
 <p>Here's a <a href="https://www.youtube.com/watch?v=-iSAyiicyQY">video link</a> that I usually refer to when in doubt for ubuntu</p>
 
 <ol>
-    <li>Make a partition using Create and format hard disk partitions (Disk management). I'd suggest a minimum of 30 GB of space for your Linux partition, however you should allocate more if you can afford it. Just keep the partition as free unallocated space.
-    <li>Download the iso image of the OS you want to use. For Ubuntu go to: <a href="https://ubuntu.com/download/desktop">Ubuntu downloads</a>
-    <li>Make a bootable USB by using software such as <a href="https://etcher.balena.io/">Balena Etcher</a> or <a href="https://www.ventoy.net/en/index.html">Ventoy</a>. I have found Ventoy to be a life-changing tool, where you can use your bootable USB for storing multiple ISO images, alongside other files for daily usage. However, Ventoy may not work for some systems.
-    <li>Next, shutdown your system and boot into the UEFI boot select menu. You should see the removable USB as a boot medium.
-    <li>Boot into the live bootable USB.
-    <li>Setup your Linux system as you would into the partition created. Here's a useful link for <a href="https://www.youtube.com/watch?v=-iSAyiicyQY">Ubuntu</a> (Thanks Ksk Royal for making this amazing video tutorial).
+    <li>Make a partition using Create and format hard disk partitions (Disk management). I'd suggest a minimum of 30 GB of space for your Linux partition, however you should allocate more if you can afford it. Just keep the partition as free unallocated space.</li>
+    <li>Download the iso image of the OS you want to use. For Ubuntu go to: <a href="https://ubuntu.com/download/desktop">Ubuntu downloads</a></li>
+    <li>Make a bootable USB by using software such as <a href="https://etcher.balena.io/">Balena Etcher</a> or <a href="https://www.ventoy.net/en/index.html">Ventoy</a>. I have found Ventoy to be a life-changing tool, where you can use your bootable USB for storing multiple ISO images, alongside other files for daily usage. However, Ventoy may not work for some systems.</li>
+    <li>Next, shutdown your system and boot into the UEFI boot select menu. You should see the removable USB as a boot medium.</li>
+    <li>Boot into the live bootable USB.</li>
+    <li>Setup your Linux system as you would into the partition created. Here's a useful link for <a href="https://www.youtube.com/watch?v=-iSAyiicyQY">Ubuntu</a> (Thanks Ksk Royal for making this amazing video tutorial).</li>
 </ol>
 
 <h2>How to undo dual boot or clean-up multi-boot systems!</h2>
@@ -26,37 +26,35 @@
 <ol>
     <li><b>The easy way:</b> Using the boot-repair-disk tool. You can follow this <a href="https://youtu.be/oLJczJBjhj0?si=9_K5uyrKA9Nn-ib4">video tutorial</a> or the steps given below:
         <ol type="i">
-            <li>Download the ISO image using the link: <a href="https://sourceforge.net/projects/boot-repair-cd/">boot-repair-disk</a>
-            <li>Create a bootable disk with this ISO image using Balena, Ventoy, or any other tool you are comfortable with.
-            <li>Now, boot into this option and should be visible as UEFI removable partition (or similar option). Once in, you should be welcomed by a primitive Linux home. The Boot Repair should automatically start.
-            <li>If not, launch it using the icon that looks like a spanner
-            <li>If the tool asks to update it, select yes and let it update. After the update is complete, the tool will continue scanning your system for potential boot related issues.
-            <li>In a few minutes the tool will finish its diagnosis, and you you can then choose to simply select <b>Recommended repair</b> which should normally work. You can create a <b>BootInfo Summary</b> which will list all the existing bootloaders.
+            <li>Download the ISO image using the link: <a href="https://sourceforge.net/projects/boot-repair-cd/">boot-repair-disk</a></li>
+            <li>Create a bootable disk with this ISO image using Balena, Ventoy, or any other tool you are comfortable with.</li>
+            <li>Now, boot into this option and should be visible as UEFI removable partition (or similar option). Once in, you should be welcomed by a primitive Linux home. The Boot Repair should automatically start.</li>
+            <li>If not, launch it using the icon that looks like a spanner</li>
+            <li>If the tool asks to update it, select yes and let it update. After the update is complete, the tool will continue scanning your system for potential boot related issues.</li>
+            <li>In a few minutes the tool will finish its diagnosis, and you you can then choose to simply select <b>Recommended repair</b> which should normally work. You can create a <b>BootInfo Summary</b> which will list all the existing bootloaders.</li>
             <li>Once the "Recommended Repair" is complete, you should only see the boot options that actually work!
-            
+            </li>
         </ol>
-    
+    </li>
     <li><b>The not so easy way:</b> Manually deleting boot options from Windows. I know it sounds scary, but don't worry, the step-by-step guide will get you through the process effortlessly. I followed these 2 links to successfully fix my UEFI boot menu: <a href="https://unix.stackexchange.com/questions/552728/removed-both-Linux-installations-but-bios-still-shows-them-in-boot-options">Unix Stack Exchange</a> and <a href="https://dev.to/spectrumcetb/how-to-remove-ubuntu-completely-from-a-dual-boot-pc-uefi-3f12#:~:text=You%20will%20still%20find%20ubuntu,step%20is%20to%20remove%20it">Dev guide by Silla Priyadarshni</a>. Make sure to follow from the first to the last step in order:
         <ol type="i">
-            <li>Open a command prompt (cmd.exe) as an Administrator.
-            <li>List the boot options from firmware boot manager using <code>bcdedit /enum firmware</code>. Each entry will have a description, look for the one that matches your previously installed boot OS.
-            <li>To delete an entry, use bcdedit /delete <identifier>, replacing <identifier> with the identifier GUID value of the corresponding entry. The command should look like:
-            <code>bcdedit /delete {12345678-9abc-def0-1234-56789abcdef0}</code>.
-            <li>Start the diskpart tool by the command - <code>diskpart</code>.
-            <li>Identify UEFI partitions by:  <code>list disk</code>.
-            <li>Mount the concerned disk (if your boot is in other disk it might be disk 1 or 2, but for single disk systems it'll be disk 0): <code>select disk 0</code>. 
-            <li>Check all the partitions of the selected disk using: <code>list partition</code> and identify the <b>uefi system partition</b>.
-            <li>Mount the concerned partition: <code>select partition 3</code>. In my case, the uefi partition system had partition number 3, it might vary in your case.
-            <li>Assign a label to the partition using: <code>assign letter=t</code> (It can be any letter). This will mount your partition EFI partition (approx. 100 mb) in file explorer.
-            <li>Exit the diskpart tool using: <code>exit</code>.
-            <li>Now access the file system of the mounted partition using the letter which you have assigned in the CMD line. I am entering <code>t:</code>.
-            <li>List the contents of the partition using: <code>dir</code>.
-            <li>Now we have to change folder so type <code>cd efi</code> and type <code>dir</code> to see the contents of efi folder.
-            <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to confirm deletion.
-            <li>Type <code>dir</code> to ensure the folder is deleted
-            <li>Finally, restart your PC to apply changes! 
-            
-</ol>
+            <li>Open a command prompt (cmd.exe) as an Administrator.</li>
+            <li>List the boot options from firmware boot manager using <code>bcdedit /enum firmware</code>. Each entry will have a description, look for the one that matches your previously installed boot OS.</li>
+            <li>To delete an entry, use <code>bcdedit /delete {identifier}</code>, replacing {identifier} with the <b>identifier GUID value</b> of the corresponding entry. The command should look like:
+            <code>bcdedit /delete {12345678-9abc-def0-1234-56789abcdef0}</code>.</li>
+            <li>Start the diskpart tool by the command - <code>diskpart</code>.</li>
+            <li>Identify UEFI partitions by:  <code>list disk</code>.</li>
+            <li>Mount the concerned disk (if your boot is in other disk it might be disk 1 or 2, but for single disk systems it'll be disk 0): <code>select disk 0</code>. </li>
+            <li>Check all the partitions of the selected disk using: <code>list partition</code> and identify the <b>uefi system partition</b>.</li>
+            <li>Mount the concerned partition: <code>select partition 3</code>. In my case, the uefi partition system had partition number 3, it might vary in your case.</li>
+            <li>Assign a label to the partition using: <code>assign letter=t</code> (It can be any letter). This will mount your partition EFI partition (approx. 100 mb) in file explorer.</li>
+            <li>Exit the diskpart tool using: <code>exit</code>.</li>
+            <li>Now access the file system of the mounted partition using the letter which you have assigned in the CMD line. I am entering <code>t:</code>.</li>
+            <li>List the contents of the partition using: <code>dir</code>.</li>
+            <li>Now we have to change folder so type <code>cd efi</code> and type <code>dir</code> to see the contents of efi folder.</li>
+            <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to confirm deletion.</li>
+            <li>Type <code>dir</code> to ensure the folder is deleted</li>
+            <li>Finally, restart your PC to apply changes!</li> </ol> </li>
 </ol>
 
 <p>Congratulations! You can now recover the original state of your PC from any number of OS configuration changes!</p>
@@ -68,20 +66,20 @@
 <p>Before we begin, I would like to give a few disclaimers:</p>
 
 <ol>
-    <li>You might face issues while booting with your original OS (eg. Windows), as the BIOS may not be able to detect all necessary partitions (grub bootloader).
-    <li>Make sure you use a USB 3.0+ device and port for optimal speeds.
-    <li>Have a backup ready of your most important files. As suggested for all new dual boot setups, its best to have a backup in case things go sideways.
-    <li>You will need 2 USB ports - One for the external SSD and another for the bootable pendrive. You can use a USB hub if necessary.
+    <li>You might face issues while booting with your original OS (eg. Windows), as the BIOS may not be able to detect all necessary partitions (grub bootloader).</li>
+    <li>Make sure you use a USB 3.0+ device and port for optimal speeds.</li>
+    <li>Have a backup ready of your most important files. As suggested for all new dual boot setups, its best to have a backup in case things go sideways.</li>
+    <li>You will need 2 USB ports - One for the external SSD and another for the bootable pendrive. You can use a USB hub if necessary.</li>
 </ol>
 
 <p>Now to the good stuff! Follow these steps for setting up dual boot using an external SSD:</p>
 
 <ol>
-    <li>Buy an external SSD with ample storage capacity something like: <a href="https://a.co/d/dfzWilH">example SSD</a> should do.
-    <li>Mount both the external SSD and the bootable USB into your PC and restart your PC into the BIOS boot menu.
-    <li>Now follow the same steps that you would to setup a normal dual boot system. Carefully select the external SSD as the partition for installing your Linux Distro.
-    <li>After your Linux installation is done, restart into the BIOS boot menu while ensuring that the external SSD is mounted to your system.
-    <li>Select the Linux distro that matches the name of your boot media.
+    <li>Buy an external SSD with ample storage capacity something like: <a href="https://a.co/d/dfzWilH">example SSD</a> should do.</li>
+    <li>Mount both the external SSD and the bootable USB into your PC and restart your PC into the BIOS boot menu.</li>
+    <li>Now follow the same steps that you would to setup a normal dual boot system. Carefully select the external SSD as the partition for installing your Linux Distro.</li>
+    <li>After your Linux installation is done, restart into the BIOS boot menu while ensuring that the external SSD is mounted to your system.</li>
+    <li>Select the Linux distro that matches the name of your boot media.</li>
 </ol>
 
 <p>Congratulations! You can now work in your favorite Linux distro without running out of space. 
