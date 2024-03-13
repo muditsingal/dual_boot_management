@@ -54,13 +54,12 @@
             <li>Now we have to change folder so type <code>cd efi</code> and type <code>dir</code> to see the contents of efi folder.</li>
             <li>Now you will see the list where a folder named of Linux that you have installed once (like Ubuntu, fedora, etc.). That's the folder which we want to delete. Type <code>rd /s</code>. I entered <code>rd ubuntu /s</code>. Type Y to confirm deletion.</li>
             <li>Type <code>dir</code> to ensure the folder is deleted</li>
-            <li>Finally, restart your PC to apply changes!</li>
-        </ol>
-    </li>
+            <li>Finally, restart your PC to apply changes!</li> </ol> </li>
 </ol>
+
 <p>Congratulations! You can now recover the original state of your PC from any number of OS configuration changes!</p>
 
-<h1>How to give your PC an external soul (Dual boot using an external boot drive)</h1>
+<h2>How to give your PC an external soul (Dual boot using an external boot drive)</h2>
 
 <p>Sometimes, you do not have (or cannot add) sufficient storage in your PC (a common case for laptops). Now, you might be frustrated how you can allocate sufficient storage for another partition in which you will keep your Linux distro. Well you are in luck! You can use an external SSD to create a dual boot system, just like you'd use an internal SSD. </p>
 
